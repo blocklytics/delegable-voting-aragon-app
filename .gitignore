@@ -7,3 +7,4 @@ build
 ipfs.cmd
 package-lock.json
 yarn.lock
+.env*

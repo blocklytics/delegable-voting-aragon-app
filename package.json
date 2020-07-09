@@ -20,6 +20,9 @@
     "publish:major": "buidler publish major",
     "publish:minor": "buidler publish minor",
     "publish:patch": "buidler publish patch",
+    "publish-rinkeby:major": "buidler publish major --network rinkeby",
+    "publish-rinkeby:minor": "buidler publish minor --network rinkeby",
+    "publish-rinkeby:patch": "buidler publish patch --network rinkeby",
     "install:frontend": "cd app && npm install"
   },
   "dependencies": {
