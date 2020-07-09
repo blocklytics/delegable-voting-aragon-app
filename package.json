@@ -1,0 +1,39 @@
+{
+  "name": "delegable-voting",
+  "version": "0.0.1",
+  "description": "Voting app clone that gives voters the option to vote themselves or delegate to another address",
+  "files": [
+    "/abi",
+    "/arapp.json",
+    "/build",
+    "/contracts",
+    "/scripts",
+    "/test"
+  ],
+  "author": "Chris Piatt <chris@blocklytics.org>",
+  "scripts": {
+    "postinstall": "yarn compile && yarn build-app",
+    "build-app": "cd app && npm install && cd ..",
+    "compile": "buidler compile --force",
+    "test": "buidler test --network buidlerevm",
+    "start": "buidler start",
+    "publish:major": "buidler publish major",
+    "publish:minor": "buidler publish minor",
+    "publish:patch": "buidler publish patch",
+    "install:frontend": "cd app && npm install"
+  },
+  "dependencies": {
+    "@aragon/apps-shared-minime": "^1.0.2",
+    "@aragon/os": "^4.4.0"
+  },
+  "devDependencies": {
+    "@aragon/buidler-aragon": "^0.2.0",
+    "@aragon/contract-test-helpers": "0.0.1",
+    "@aragon/test-helpers": "^2.1.0",
+    "@nomiclabs/buidler": "^1.3.0",
+    "@nomiclabs/buidler-etherscan": "^1.3.0",
+    "@nomiclabs/buidler-truffle5": "^1.3.0",
+    "@nomiclabs/buidler-web3": "^1.3.0",
+    "web3": "^1.2.0"
+  }
+}

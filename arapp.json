@@ -1,0 +1,48 @@
+{
+  "roles": [
+    {
+      "name": "Create new votes",
+      "id": "CREATE_VOTES_ROLE",
+      "params": []
+    },
+    {
+      "name": "Modify support",
+      "id": "MODIFY_SUPPORT_ROLE",
+      "params": [
+        "New support",
+        "Current support"
+      ]
+    },
+    {
+      "name": "Modify quorum",
+      "id": "MODIFY_QUORUM_ROLE",
+      "params": [
+        "New quorum",
+        "Current quorum"
+      ]
+    }
+  ],
+  "environments": {
+    "default": {
+      "appName": "delegable-voting.open.aragonpm.eth",
+      "network": "rpc"
+    },
+    "rinkeby": {
+      "registry": "0x98df287b6c145399aaa709692c8d308357bc085d",
+      "appName": "delegable-voting.open.aragonpm.eth",
+      "network": "rinkeby"
+    },
+    "staging": {
+      "registry": "0xfe03625ea880a8cba336f9b5ad6e15b0a3b5a939",
+      "appName": "delegable-voting.open.aragonpm.eth",
+      "network": "rinkeby"
+    },
+    "mainnet": {
+      "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+      "appName": "delegable-voting.open.aragonpm.eth",
+      "network": "mainnet"
+    }
+  },
+  "appName": "delegable-voting.open.aragonpm.eth",
+  "path": "contracts/DelegableVoting.sol"
+}
