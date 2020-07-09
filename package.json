@@ -5,7 +5,7 @@
   "files": [
     "/abi",
     "/arapp.json",
-    "/build",
+    "/dist",
     "/contracts",
     "/scripts",
     "/test"

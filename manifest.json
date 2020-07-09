@@ -3,7 +3,7 @@
   "author": "Chris Piatt",
   "description": "Create, participate in, and delegate votes",
   "details_url": "meta/details.md",
-  "source_url": "https://github.com/blocklytics/aragon-apps/blob/master/delegable-voting",
+  "source_url": "https://github.com/blocklytics/delegable-voting-aragon-app",
   "icons": [
     {
       "src": "meta/icon.svg",

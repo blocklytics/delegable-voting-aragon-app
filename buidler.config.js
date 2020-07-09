@@ -27,7 +27,7 @@ module.exports = {
     appServePort: 8001,
     clientServePort: 3000,
     appSrcPath: 'app/',
-    appBuildOutputPath: 'build/',
+    appBuildOutputPath: 'dist/',
     appName: 'delegable-voting',
     hooks, // Path to script hooks
   },

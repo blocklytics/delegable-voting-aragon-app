@@ -47,12 +47,12 @@
     "test": "jest",
     "start": "yarn sync-assets && yarn watch:script && yarn serve",
     "build": "yarn sync-assets && yarn build:app && yarn build:script",
-    "build:app": "parcel build index.html --out-dir ../build/ --public-url \".\" --no-cache",
-    "build:script": "parcel build src/script.js --out-dir ../build/",
-    "watch:script": "parcel watch src/script.js --out-dir ../build/ --no-hmr",
+    "build:app": "parcel build index.html --out-dir ../dist/ --public-url \".\" --no-cache",
+    "build:script": "parcel build src/script.js --out-dir ../dist/",
+    "watch:script": "parcel watch src/script.js --out-dir ../dist/ --no-hmr",
     "watch": "yarn watch:script",
-    "serve": "parcel serve index.html --out-dir ../build/ --no-cache",
-    "sync-assets": "copy-aragon-ui-assets -n aragon-ui ../build && rsync -rtu ./public/ ../build"
+    "serve": "parcel serve index.html --out-dir ../dist/ --no-cache",
+    "sync-assets": "copy-aragon-ui-assets -n aragon-ui ../dist && rsync -rtu ./public/ ../dist"
   },
   "browserslist": [
     ">2%",
