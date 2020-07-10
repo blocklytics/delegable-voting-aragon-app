@@ -3,12 +3,18 @@
 This is a fork of the 'Voting' app built by Aragon that gives voters the option to delegate their votes or vote for themselves.
 
 ## Install dependencies
-To install dependencies, run `yarn install`
 
+To install dependencies, run `yarn install`
 
 ## Running this app
 
 To run the app in a browser with frontend and contract hot-reloading, simply run `yarn start`.
+
+## Publish app
+
+First, save .env.sample as a new file (i.e. .env.dev) and fill in all of the config variables.  Then, in a terminal run `source .env.dev`
+
+In the same terminal window, run `yarn publish-rinkeby:major` to deploy to rinkeby or `yarn publish:major` to deploy to mainnet.  You can also specify :minor or :patch instead of :major to deploy following SemVer.
 
 ### Hooks
 
