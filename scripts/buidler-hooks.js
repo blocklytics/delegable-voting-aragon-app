@@ -46,6 +46,7 @@ module.exports = {
     const bigExp = (x, y) => toBN(x).mul(toBN(10).pow(toBN(y)))
     const pct16 = x => bigExp(x, 16)
     const tokenAddress = token ? token.address : undefined
+    console.log("Token address: " + tokenAddress)
     const neededSupport = pct16(50)
     const minimumAcceptanceQuorum = pct16(20)
     const votingDuration = 1000

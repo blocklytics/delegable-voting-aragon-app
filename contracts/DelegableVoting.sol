@@ -144,6 +144,26 @@ contract DelegableVoting is IForwarder, AragonApp {
     }
 
     /**
+    * @notice Delegate "`_amount`" of voting power to  "`_delegate`"
+    * @param _delegate Delegate address
+    * @param _amount Voting power
+    * @return true if delegation was successful
+    */
+    function delegateVotingPower(address _delegate, uint256 _amount) external returns (bool delegationSuccessful) {
+        return token.delegate(_delegate, _amount);
+    }
+
+    /**
+    * @notice Undelegate "`_amount`" of voting power to  "`_delegate`"
+    * @param _delegate Delegate address
+    * @param _amount Voting power
+    * @return true if undelegation was successful
+    */
+    function undelegateVotingPower(address _delegate, uint256 _amount) external returns (bool undelegationSuccessful) {
+        return token.undelegate(_delegate, _amount);
+    }
+
+    /**
     * @notice Vote `_supports ? 'yes' : 'no'` in vote #`_voteId`
     * @dev Initialization check is implicitly provided by `voteExists()` as new votes can only be
     *      created via `newVote(),` which requires initialization

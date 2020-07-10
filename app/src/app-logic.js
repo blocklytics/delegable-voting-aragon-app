@@ -61,6 +61,36 @@ export function useCreateVoteAction(onDone = noop) {
   )
 }
 
+// Delegate voting power
+export function useDelegateVoteAction(onDone = noop) {
+  const api = useApi()
+  return useCallback(
+    (delegate, amount) => {
+      if (api) {
+        // Don't care about response
+        api.delegateVotingPower(delegate, amount).toPromise()
+        onDone()
+      }
+    },
+    [api, onDone]
+  )
+}
+
+// Undelegate voting power
+export function useUndelegateVoteAction(onDone = noop) {
+  const api = useApi()
+  return useCallback(
+    (delegate, amount) => {
+      if (api) {
+        // Don't care about response
+        api.undelegateVotingPower(delegate, amount).toPromise()
+        onDone()
+      }
+    },
+    [api, onDone]
+  )
+}
+
 // Vote (the action) on a vote
 export function useVoteAction(onDone = noop) {
   const api = useApi()
@@ -94,9 +124,13 @@ export function useAppLogic() {
   const [votes, executionTargets] = useVotes()
   const [selectedVote, selectVote] = useSelectedVote(votes)
   const newVotePanel = usePanelState()
+  const delegateVotePanel = usePanelState()
+  const undelegateVotePanel = usePanelState()
 
   const actions = {
     createVote: useCreateVoteAction(newVotePanel.requestClose),
+    delegateVote: useDelegateVoteAction(delegateVotePanel.requestClose),
+    undelegateVote: useUndelegateVoteAction(undelegateVotePanel.requestClose),
     vote: useVoteAction(),
     execute: useExecuteAction(),
   }
@@ -106,6 +140,8 @@ export function useAppLogic() {
     executionTargets,
     isSyncing: isSyncing || !ready,
     newVotePanel,
+    delegateVotePanel,
+    undelegateVotePanel,
     selectVote,
     selectedVote,
     votes,

@@ -9,6 +9,8 @@ import {
 } from '@aragon/ui'
 import { useGuiStyle } from '@aragon/api-react'
 import NewVotePanel from './components/NewVotePanel'
+import DelegateVotePanel from './components/DelegateVotePanel'
+import UndelegateVotePanel from './components/UndelegateVotePanel'
 import useFilterVotes from './hooks/useFilterVotes'
 import useScrollTop from './hooks/useScrollTop'
 import NoVotes from './screens/NoVotes'
@@ -24,6 +26,8 @@ const App = React.memo(function App() {
     executionTargets,
     isSyncing,
     newVotePanel,
+    delegateVotePanel,
+    undelegateVotePanel,
     selectVote,
     selectedVote,
     votes,
@@ -66,6 +70,8 @@ const App = React.memo(function App() {
           >
             <NoVotes
               onNewVote={newVotePanel.requestOpen}
+              onDelegateVote={delegateVotePanel.requestOpen}
+              onUndelegateVote={undelegateVotePanel.requestOpen}
               isSyncing={isSyncing}
             />
           </div>
@@ -81,6 +87,24 @@ const App = React.memo(function App() {
                     mode="strong"
                     onClick={newVotePanel.requestOpen}
                     label="New vote"
+                    icon={<IconPlus />}
+                    display={compactMode ? 'icon' : 'label'}
+                  />
+                ),
+                !selectedVote && (
+                  <Button
+                    mode="strong"
+                    onClick={delegateVotePanel.requestOpen}
+                    label="Delegate vote"
+                    icon={<IconPlus />}
+                    display={compactMode ? 'icon' : 'label'}
+                  />
+                ),
+                !selectedVote && (
+                  <Button
+                    mode="strong"
+                    onClick={undelegateVotePanel.requestOpen}
+                    label="Undelegate vote"
                     icon={<IconPlus />}
                     display={compactMode ? 'icon' : 'label'}
                   />
@@ -120,6 +144,14 @@ const App = React.memo(function App() {
         <NewVotePanel
           onCreateVote={actions.createVote}
           panelState={newVotePanel}
+        />
+        <DelegateVotePanel
+          onDelegateVote={actions.delegateVote}
+          panelState={delegateVotePanel}
+        />
+        <UndelegateVotePanel
+          onUndelegateVote={actions.undelegateVote}
+          panelState={undelegateVotePanel}
         />
       </React.Fragment>
     </Main>

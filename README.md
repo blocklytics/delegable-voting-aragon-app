@@ -2,9 +2,13 @@
 
 This is a fork of the 'Voting' app built by Aragon that gives voters the option to delegate their votes or vote for themselves.
 
+## Install dependencies
+To install dependencies, run `yarn install`
+
+
 ## Running this app
 
-To run the app in a browser with frontend and contract hot-reloading, simply run `npm start`.
+To run the app in a browser with frontend and contract hot-reloading, simply run `yarn start`.
 
 ### Hooks
 
