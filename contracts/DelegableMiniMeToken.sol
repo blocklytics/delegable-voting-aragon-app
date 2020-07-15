@@ -211,6 +211,12 @@ contract DelegableMiniMeToken is Controlled, MiniMeToken {
         return sharesAt(_shareholder, block.number);
     }
 
+    /// @param _owner The address that's delegable balance is being requested
+    /// @return The delegable balance of `_owner` at the current block
+    function delegableBalance(address _owner) public constant returns (uint256 delegableBalance) {
+        return delegableBalanceAt(_owner, block.number);
+    }
+
     /// @notice `msg.sender` approves `_spender` to spend `_amount` tokens on
     ///  its behalf. This is a modified version of the ERC20 approve function
     ///  to be a little bit safer
@@ -388,7 +394,7 @@ contract DelegableMiniMeToken is Controlled, MiniMeToken {
     /// @param _owner The address from which the balance will be retrieved
     /// @param _blockNumber The block number when the balance is queried
     /// @return The balance at `_blockNumber`
-    function balanceOfAt(address _owner, uint _blockNumber) public constant returns (uint) {
+    function balanceOfAt(address _owner, uint _blockNumber) public constant returns (uint256) {
 
         // These next few lines are used when the balance of the token is
         //  requested before a check point was ever created for this token, it
@@ -437,10 +443,37 @@ contract DelegableMiniMeToken is Controlled, MiniMeToken {
         }
     }
 
+    /// @dev Gets the delegable balance of `_owner` at a specific `_blockNumber`
+    /// @param _owner The address of the owner
+    /// @param _blockNumber The block number when the balance is queried
+    /// @return The balance at `_blockNumber`
+    function delegableBalanceAt(address _owner, uint _blockNumber) public constant returns (uint256) {
+
+        // These next few lines are used when the balance of the token is
+        //  requested before a check point was ever created for this token, it
+        //  requires that the `parentToken.sharesAt` be queried at the
+        //  genesis block for that token as this contains initial share balance of
+        //  this token for this shareholder
+        if ((balances[_owner].length == 0 || balances[_owner][0].fromBlock > _blockNumber)) {
+            if (address(parentToken) != 0) {
+                return parentToken.delegableBalanceAt(_owner, min(_blockNumber, parentSnapShotBlock));
+            } else {
+                // Has no parent
+                return 0;
+            }
+
+        // This will return the expected balance during normal situations
+        } else {
+            uint256 delegatedFromBalance = getValueAt(totalDelegatedFrom[_owner], _blockNumber);
+            uint256 personalBalance = getValueAt(balances[_owner], _blockNumber);
+            return personalBalance - delegatedFromBalance;
+        }
+    }
+
     /// @notice Total amount of tokens at a specific `_blockNumber`.
     /// @param _blockNumber The block number when the totalSupply is queried
     /// @return The total amount of tokens at `_blockNumber`
-    function totalSupplyAt(uint _blockNumber) public constant returns(uint) {
+    function totalSupplyAt(uint _blockNumber) public constant returns(uint256) {
 
         // These next few lines are used when the totalSupply of the token is
         //  requested before a check point was ever created for this token, it

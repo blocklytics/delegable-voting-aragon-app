@@ -3,6 +3,9 @@ const hooks = require('./scripts/buidler-hooks')
 const INFURA_KEY = process.env.INFURA_KEY
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 const PRIVATE_KEY = process.env.PRIVATE_KEY
+const NETWORK = process.env.NETWORK
+
+const etherscanDomain = NETWORK == "mainnet" ? "api" : "api-" + NETWORK
 
 usePlugin('@aragon/buidler-aragon')
 
@@ -29,6 +32,7 @@ module.exports = {
   // Etherscan plugin configuration. Learn more at https://github.com/nomiclabs/buidler/tree/master/packages/buidler-etherscan
   etherscan: {
     apiKey: ETHERSCAN_API_KEY, // API Key for smart contract verification. Get yours at https://etherscan.io/apis
+    url: "https://" + etherscanDomain + ".etherscan.io/api"
   },
   // Aragon plugin configuration
   aragon: {

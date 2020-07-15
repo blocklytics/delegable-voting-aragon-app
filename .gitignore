@@ -8,4 +8,5 @@ ipfs.cmd
 package-lock.json
 yarn.lock
 .env*
+.DS_STORE
 !.env.sample
