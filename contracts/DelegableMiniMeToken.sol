@@ -259,7 +259,7 @@ contract DelegableMiniMeToken is Controlled, MiniMeToken {
         uint previousTotalDelegatedTo = delegatedTo(_delegate);
         // TODO: require that previousTotalDelegatedTo + _amount does not exceed MAX_DELEGATED value.  Done through controller?
 
-        // Alerts the token controller of the approve function call
+        // Alerts the token controller of the delegate function call
         if (isContract(controller)) {
             // Adding the ` == true` makes the linter shut up so...
             require(IDelegableTokenController(controller).onDelegate(msg.sender, _delegate, _amount) == true);
