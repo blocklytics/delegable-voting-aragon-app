@@ -5,10 +5,12 @@ import {
   getUserBalanceNow, 
   getUserVotingSharesAt, 
   getUserVotingSharesNow, 
-  getUserDelegateToAt, 
+  getUserDelegatedToAt, 
   getUserDelegatedToNow, 
-  getUserDelegateFromAt, 
-  getUserDelegatedFromNow 
+  getUserDelegatedFromAt, 
+  getUserDelegatedFromNow,
+  getUserDelegableBalanceAt,
+  getUserDelegableBalanceNow
 } from '../token-utils'
 import { getCanExecute, getCanVote } from '../vote-utils'
 import useTokenContract from './useTokenContract'
@@ -71,6 +73,25 @@ export default function useExtendedVoteData(vote) {
   )
   const userVotingSharesNow = usePromise(userVotingSharesNowPromise, [], -1)
 
+  const userDelegableBalancePromise = useMemo(() => {
+    if (!vote) {
+      return -1
+    }
+    return getUserDelegableBalanceAt(
+      connectedAccount,
+      vote.data.snapshotBlock,
+      tokenContract,
+      tokenDecimals
+    )
+  }, [connectedAccount, tokenContract, tokenDecimals, vote])
+  const userDelegableBalance = usePromise(userDelegableBalancePromise, [], -1)
+
+  const userDelegableBalanceNowPromise = useMemo(
+    () => getUserDelegableBalanceNow(connectedAccount, tokenContract, tokenDecimals),
+    [connectedAccount, tokenContract, tokenDecimals]
+  )
+  const userDelegableBalanceNow = usePromise(userDelegableBalanceNowPromise, [], -1)
+
   return {
     canExecute,
     canUserVote,
@@ -78,6 +99,10 @@ export default function useExtendedVoteData(vote) {
     userBalancePromise,
     userBalanceNow,
     userBalanceNowPromise,
+    userDelegableBalance,
+    userDelegableBalancePromise,
+    userDelegableBalanceNow,
+    userDelegableBalanceNowPromise,
     userVotingShares,
     userVotingSharesPromise,
     userVotingSharesNow,

@@ -1,6 +1,9 @@
 import React from 'react'
 import { Box, Button, EmptyStateCard, GU, LoadingRing, textStyle } from '@aragon/ui'
 import noVotesPng from '../assets/no-votes.png'
+import delegatePng from '../assets/delegate.png'
+import unDelegatePng from '../assets/undelegate.png'
+
 
 const NoVotes = React.memo(function NoVotes({ onNewVote, onDelegateVote, onUndelegateVote, isSyncing }) {
   return (
@@ -96,7 +99,7 @@ const NoVotes = React.memo(function NoVotes({ onNewVote, onDelegateVote, onUndel
               margin: auto;
               height: 170px;
             `}
-            src={noVotesPng}
+            src={delegatePng}
             alt="Delegate voting power"
           />
         }
@@ -130,7 +133,7 @@ const NoVotes = React.memo(function NoVotes({ onNewVote, onDelegateVote, onUndel
               margin: auto;
               height: 170px;
             `}
-            src={noVotesPng}
+            src={unDelegatePng}
             alt="Undelegate voting power"
           />
         }

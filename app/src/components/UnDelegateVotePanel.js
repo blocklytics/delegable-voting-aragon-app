@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
+import { multiplyByDecimals } from '../math-utils'
+import { useAppState } from '@aragon/api-react'
+
 import {
   Button,
   Field,
@@ -28,13 +31,14 @@ const UndelegateVotePanel = React.memo(function UndelegateVotePanel({
 function UndelegateVotePanelContent({ onUndelegateVote }) {
   const [delegate, setDelegate] = useState('')
   const [delegationAmount, setDelegationAmount] = useState('')
+  const { tokenDecimals } = useAppState()
 
   const inputRef = useSidePanelFocusOnReady()
 
   const handleSubmit = useCallback(
     event => {
       event.preventDefault()
-      onUndelegateVote(delegate.trim(), delegationAmount)
+      onUndelegateVote(delegate.trim(), multiplyByDecimals(delegationAmount, tokenDecimals).toString())
     },
     [onUndelegateVote, delegate, delegationAmount]
   )

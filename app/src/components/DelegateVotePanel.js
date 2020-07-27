@@ -1,5 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useAppState } from '@aragon/api-react'
+import { getUserDelegableBalanceNow } from '../token-utils'
+import { multiplyByDecimals } from '../math-utils'
+
 import {
   Button,
   Field,
@@ -28,13 +32,17 @@ const DelegateVotePanel = React.memo(function DelegateVotePanel({
 function DelegateVotePanelContent({ onDelegateVote }) {
   const [delegate, setDelegate] = useState('')
   const [delegationAmount, setDelegationAmount] = useState('')
+  const { tokenDecimals } = useAppState()
+  
+  // const tokenContract = useTokenContract()
+  // const userDelegableBalance = await getUserDelegableBalanceNow(connectedAccount, tokenContract, tokenDecimals)
 
   const inputRef = useSidePanelFocusOnReady()
 
   const handleSubmit = useCallback(
     event => {
       event.preventDefault()
-      onDelegateVote(delegate.trim(), delegationAmount)
+      onDelegateVote(delegate.trim(), multiplyByDecimals(delegationAmount, tokenDecimals).toString())
     },
     [onDelegateVote, delegate, delegationAmount]
   )
@@ -78,6 +86,9 @@ function DelegateVotePanelContent({ onDelegateVote }) {
             wide
           />
         </Field>
+        {/* <div>
+          Available balance: {userDelegableBalance}
+        </div> */}
         <div
           css={`
             margin-bottom: ${3 * GU}px;

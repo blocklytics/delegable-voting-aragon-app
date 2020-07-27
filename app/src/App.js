@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import {
+  GU,
   Button,
   Header,
   IconPlus,
@@ -82,33 +83,38 @@ const App = React.memo(function App() {
             <Header
               primary="Delegable Voting"
               secondary={
-                !selectedVote && (
+                !selectedVote && [
                   <Button
                     mode="strong"
                     onClick={newVotePanel.requestOpen}
                     label="New vote"
                     icon={<IconPlus />}
                     display={compactMode ? 'icon' : 'label'}
-                  />
-                ),
-                !selectedVote && (
+                    css={`
+                      margin-left: ${GU}px;
+                    `}
+                  />,
                   <Button
                     mode="strong"
                     onClick={delegateVotePanel.requestOpen}
                     label="Delegate vote"
                     icon={<IconPlus />}
                     display={compactMode ? 'icon' : 'label'}
-                  />
-                ),
-                !selectedVote && (
+                    css={`
+                      margin-left: ${GU}px;
+                    `}
+                  />,
                   <Button
                     mode="strong"
                     onClick={undelegateVotePanel.requestOpen}
                     label="Undelegate vote"
                     icon={<IconPlus />}
                     display={compactMode ? 'icon' : 'label'}
+                    css={`
+                      margin-left: ${GU}px;
+                    `}
                   />
-                )
+                ]
               }
             />
             {selectedVote ? (

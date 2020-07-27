@@ -2,8 +2,8 @@ node_modules
 artifacts
 .cache
 cache
-dist
 build
+dist
 ipfs.cmd
 package-lock.json
 yarn.lock

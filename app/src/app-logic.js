@@ -4,6 +4,8 @@ import appStateReducer from './app-state-reducer'
 import { EMPTY_CALLSCRIPT } from './evmscript-utils'
 import usePanelState from './hooks/usePanelState'
 import useVotes from './hooks/useVotes'
+import useTokenContract from './hooks/useTokenContract'
+
 import { noop } from './utils'
 import { VOTE_YEA } from './vote-types'
 
@@ -63,31 +65,31 @@ export function useCreateVoteAction(onDone = noop) {
 
 // Delegate voting power
 export function useDelegateVoteAction(onDone = noop) {
-  const api = useApi()
+  const token = useTokenContract()
   return useCallback(
     (delegate, amount) => {
-      if (api) {
+      if (token) {
         // Don't care about response
-        api.delegateVotingPower(delegate, amount).toPromise()
+        token.delegate(delegate, amount).toPromise()
         onDone()
       }
     },
-    [api, onDone]
+    [token, onDone]
   )
 }
 
 // Undelegate voting power
 export function useUndelegateVoteAction(onDone = noop) {
-  const api = useApi()
+  const token = useTokenContract()
   return useCallback(
     (delegate, amount) => {
-      if (api) {
+      if (token) {
         // Don't care about response
-        api.undelegateVotingPower(delegate, amount).toPromise()
+        token.undelegate(delegate, amount).toPromise()
         onDone()
       }
     },
-    [api, onDone]
+    [token, onDone]
   )
 }
 

@@ -60,7 +60,7 @@ export async function getUserVotingSharesNow(
   return Math.floor(parseInt(balance, 10) / Math.pow(10, tokenDecimals))
 }
 
-export async function getUserDelegateToAt(
+export async function getUserDelegatedToAt(
   connectedAccount,
   snapshotBlock,
   tokenContract,
@@ -91,7 +91,7 @@ export async function getUserDelegatedToNow(
   return Math.floor(parseInt(balance, 10) / Math.pow(10, tokenDecimals))
 }
 
-export async function getUserDelegateFromAt(
+export async function getUserDelegatedFromAt(
   connectedAccount,
   snapshotBlock,
   tokenContract,
@@ -118,6 +118,37 @@ export async function getUserDelegatedFromNow(
   }
 
   const balance = await tokenContract.delegatedFrom(connectedAccount).toPromise()
+
+  return Math.floor(parseInt(balance, 10) / Math.pow(10, tokenDecimals))
+}
+
+export async function getUserDelegableBalanceAt(
+  connectedAccount,
+  snapshotBlock,
+  tokenContract,
+  tokenDecimals
+) {
+  if (!tokenContract || !connectedAccount) {
+    return -1
+  }
+
+  const balance = await tokenContract
+    .delegableBalanceAt(connectedAccount, snapshotBlock)
+    .toPromise()
+
+  return Math.floor(parseInt(balance, 10) / Math.pow(10, tokenDecimals))
+}
+
+export async function getUserDelegableBalanceNow(
+  connectedAccount,
+  tokenContract,
+  tokenDecimals
+) {
+  if (!tokenContract || !connectedAccount) {
+    return -1
+  }
+
+  const balance = await tokenContract.delegableBalance(connectedAccount).toPromise()
 
   return Math.floor(parseInt(balance, 10) / Math.pow(10, tokenDecimals))
 }

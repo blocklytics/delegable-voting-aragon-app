@@ -31,6 +31,9 @@ module.exports = {
     const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
     const DelegableMiniMeToken = artifacts.require('DelegableMiniMeToken')
     token = await DelegableMiniMeToken.new(ZERO_ADDRESS, ZERO_ADDRESS, 0, 'n', 0, 'n', false, true)
+    const DelegableMiniMeTokenFactory = artifacts.require('DelegableMiniMeTokenFactory')
+    tokenFactory = await DelegableMiniMeTokenFactory.new()
+    console.log("Token Factory: " + tokenFactory.address)
   },
 
   // Called after the app's proxy is initialized.

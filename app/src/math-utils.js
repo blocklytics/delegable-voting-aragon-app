@@ -42,6 +42,12 @@ export function percentageList(values, digits = 0) {
   return scaleBNValuesSet(values).map(value => value.toNumber())
 }
 
+export function multiplyByDecimals(number, decimals) {
+  const toBN = (x) => new BN(x)
+  const formatted = toBN(number).mul(toBN(10).pow(toBN(decimals)))
+  return formatted
+}
+
 /**
  * Generic round function, see:
  *  - https://stackoverflow.com/a/18358056/1375656

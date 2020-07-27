@@ -4,10 +4,7 @@ import voteSettings from './vote-settings'
 import { VOTE_ABSENT } from './vote-types'
 import { voteTypeFromContractEnum } from './vote-utils'
 import { EMPTY_CALLSCRIPT } from './evmscript-utils'
-import tokenDecimalsAbi from './abi/token-decimals.json'
-import tokenSymbolAbi from './abi/token-symbol.json'
-
-const tokenAbi = [].concat(tokenDecimalsAbi, tokenSymbolAbi)
+import tokenAbi from './abi/token.json'
 
 const app = new Aragon()
 
@@ -126,14 +123,14 @@ const initState = tokenAddr => async cachedState => {
 
   let tokenDecimals
   try {
-    tokenDecimals = (await token.decimals().toPromise()) || '0'
+    tokenDecimals = (await token.decimals().toPromise()) || '18'
   } catch (err) {
     console.error(
       `Failed to load token decimals for token at ${tokenAddr} due to:`,
       err
     )
-    console.error('Defaulting to 0...')
-    tokenDecimals = '0'
+    console.error('Defaulting to 18...')
+    tokenDecimals = '18'
   }
 
   const voteSettings = await loadVoteSettings()
